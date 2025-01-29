@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <sr04.h>
+
+const int trigPin1 = 8;
+const int echoPin1 = 9;
+int buz = 12;
+
+
+void setup() 
+{
+  
+  Serial.begin(9600);
+  pinMode(trigPin1, OUTPUT);    //SR04 trig
+  pinMode(echoPin1, INPUT);     //SR04 echo
+  
+  pinMode(buz,OUTPUT);       
+  pinMode(13,OUTPUT);       
+  
+  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(buz, LOW);   // turn the LED on (HIGH is the voltage level)
+  delay(700);              // wait for a second
+  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(buz, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(700);  
+  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(buz, LOW);   // turn the LED on (HIGH is the voltage level)
+  delay(700);              // wait for a second
+  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(buz, HIGH);   // turn the LED on (HIGH is the voltage level)
+  // wait for a second
+    
+}
+
+long duration, r;
+int distance;
+int flag = 0;
+int count = 1;
+int limit = 45;
+
+void loop()
+{
+  
+
+  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(buz, LOW);   // turn the LED on (HIGH is the voltage level)
+  get_dist1();
+
+  Serial.println(targetDistance1);
+   
+  if (targetDistance1 < limit)
+  {
+              
+      digitalWrite(13, HIGH);    // turn the LED off by making the voltage LOW
+      digitalWrite(buz, HIGH);   // turn the LED on (HIGH is the voltage level)
+          
+  }
+delay(450);
+}
